@@ -192,13 +192,6 @@
                 )
               )
             )
-            (termbind
-              (strict)
-              (vardecl
-                addInteger (fun (con integer) (fun (con integer) (con integer)))
-              )
-              (builtin addInteger)
-            )
             (let
               (rec)
               (termbind
@@ -1391,7 +1384,7 @@
                       fMonoidValue_c
                       (fun [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]] (fun [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]]))
                     )
-                    [ unionWith addInteger ]
+                    [ unionWith (builtin addInteger) ]
                   )
                   (termbind
                     (strict)

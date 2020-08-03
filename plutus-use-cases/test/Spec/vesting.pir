@@ -176,14 +176,6 @@
             )
             (termbind
               (strict)
-              (vardecl
-                subtractInteger
-                (fun (con integer) (fun (con integer) (con integer)))
-              )
-              (builtin subtractInteger)
-            )
-            (termbind
-              (strict)
               (vardecl error (all a (type) (fun Unit a)))
               (abs e (type) (lam thunk Unit (error e)))
             )
@@ -257,7 +249,10 @@
                                       Unit
                                       [
                                         [ { bad_name a } xs ]
-                                        [ [ subtractInteger ds ] (con 1) ]
+                                        [
+                                          [ (builtin subtractInteger) ds ]
+                                          (con 1)
+                                        ]
                                       ]
                                     )
                                   ]
@@ -275,14 +270,6 @@
               )
               (let
                 (nonrec)
-                (termbind
-                  (strict)
-                  (vardecl
-                    addInteger
-                    (fun (con integer) (fun (con integer) (con integer)))
-                  )
-                  (builtin addInteger)
-                )
                 (termbind
                   (strict)
                   (vardecl
@@ -1495,7 +1482,7 @@
                           fMonoidValue_c
                           (fun [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]] (fun [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]]))
                         )
-                        [ unionWith addInteger ]
+                        [ unionWith (builtin addInteger) ]
                       )
                       (datatypebind
                         (datatype
@@ -2034,19 +2021,6 @@
                           (nonrec)
                           (termbind
                             (strict)
-                            (vardecl fAdditiveGroupValue (con integer))
-                            (con -1)
-                          )
-                          (termbind
-                            (strict)
-                            (vardecl
-                              multiplyInteger
-                              (fun (con integer) (fun (con integer) (con integer)))
-                            )
-                            (builtin multiplyInteger)
-                          )
-                          (termbind
-                            (strict)
                             (vardecl
                               fAdditiveGroupValue_cscale
                               (fun (con integer) (fun [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]]))
@@ -2200,7 +2174,9 @@
                                                                                   ]
                                                                                   [
                                                                                     [
-                                                                                      multiplyInteger
+                                                                                      (builtin
+                                                                                        multiplyInteger
+                                                                                      )
                                                                                       i
                                                                                     ]
                                                                                     i
@@ -2308,12 +2284,9 @@
                                   w
                                   [Interval (con integer)]
                                   [
-                                    [ [ unionWith addInteger ] ww ]
+                                    [ [ unionWith (builtin addInteger) ] ww ]
                                     [
-                                      [
-                                        fAdditiveGroupValue_cscale
-                                        fAdditiveGroupValue
-                                      ]
+                                      [ fAdditiveGroupValue_cscale (con -1) ]
                                       [
                                         {
                                           [ { Interval_match (con integer) } w ]
@@ -3219,7 +3192,9 @@
                                                                                                   [
                                                                                                     [
                                                                                                       unionWith
-                                                                                                      addInteger
+                                                                                                      (builtin
+                                                                                                        addInteger
+                                                                                                      )
                                                                                                     ]
                                                                                                     [
                                                                                                       [

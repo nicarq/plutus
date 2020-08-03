@@ -304,17 +304,6 @@
               )
             )
             (termbind
-              (strict) (vardecl fAdditiveGroupValue (con integer)) (con -1)
-            )
-            (termbind
-              (strict)
-              (vardecl
-                multiplyInteger
-                (fun (con integer) (fun (con integer) (con integer)))
-              )
-              (builtin multiplyInteger)
-            )
-            (termbind
               (strict)
               (vardecl
                 fAdditiveGroupValue_cscale
@@ -466,7 +455,9 @@
                                                                     ]
                                                                     [
                                                                       [
-                                                                        multiplyInteger
+                                                                        (builtin
+                                                                          multiplyInteger
+                                                                        )
                                                                         i
                                                                       ]
                                                                       i
@@ -521,13 +512,6 @@
                   )
                 )
               )
-            )
-            (termbind
-              (strict)
-              (vardecl
-                addInteger (fun (con integer) (fun (con integer) (con integer)))
-              )
-              (builtin addInteger)
             )
             (termbind
               (strict)
@@ -1726,11 +1710,8 @@
                         ds
                         [(lam a (type) a) [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]]]
                         [
-                          [ [ unionWith addInteger ] ds ]
-                          [
-                            [ fAdditiveGroupValue_cscale fAdditiveGroupValue ]
-                            ds
-                          ]
+                          [ [ unionWith (builtin addInteger) ] ds ]
+                          [ [ fAdditiveGroupValue_cscale (con -1) ] ds ]
                         ]
                       )
                     )
@@ -2084,11 +2065,10 @@
                       )
                     )
                   )
-                  (termbind (strict) (vardecl unitDatum (con integer)) (con 0))
                   (termbind
                     (nonstrict)
                     (vardecl unitDatum Data)
-                    [ [ Constr unitDatum ] { Nil Data } ]
+                    [ [ Constr (con 0) ] { Nil Data } ]
                   )
                   (termbind
                     (strict)
@@ -2186,7 +2166,7 @@
                       (lam
                         ds
                         [(lam a (type) a) [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]]]
-                        [ [ [ unionWith addInteger ] ds ] ds ]
+                        [ [ [ unionWith (builtin addInteger) ] ds ] ds ]
                       )
                     )
                   )
@@ -2233,9 +2213,6 @@
                         ]
                       )
                     )
-                  )
-                  (termbind
-                    (strict) (vardecl fIsDataFutureAction (con integer)) (con 0)
                   )
                   (termbind
                     (strict)
@@ -3529,7 +3506,9 @@
                                                                                     equalsInteger
                                                                                     i
                                                                                   ]
-                                                                                  fIsDataFutureAction
+                                                                                  (con
+                                                                                    0
+                                                                                  )
                                                                                 ]
                                                                               ]
                                                                               (fun Unit [Maybe [Observation [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]]]])
@@ -3909,11 +3888,6 @@
                       )
                       (termbind
                         (strict)
-                        (vardecl scheckHashConstraints (con string))
-                        (con "DecodingError")
-                      )
-                      (termbind
-                        (strict)
                         (vardecl trace (fun (con string) Unit))
                         (lam
                           arg
@@ -3924,7 +3898,7 @@
                       (termbind
                         (nonstrict)
                         (vardecl scheckHashConstraints Unit)
-                        [ trace scheckHashConstraints ]
+                        [ trace (con "DecodingError") ]
                       )
                       (termbind
                         (strict)
@@ -4268,7 +4242,13 @@
                                             [
                                               [ Margins ds ]
                                               [
-                                                [ [ unionWith addInteger ] ds ]
+                                                [
+                                                  [
+                                                    unionWith
+                                                    (builtin addInteger)
+                                                  ]
+                                                  ds
+                                                ]
                                                 value
                                               ]
                                             ]
@@ -4292,7 +4272,13 @@
                                             [
                                               Margins
                                               [
-                                                [ [ unionWith addInteger ] ds ]
+                                                [
+                                                  [
+                                                    unionWith
+                                                    (builtin addInteger)
+                                                  ]
+                                                  ds
+                                                ]
                                                 value
                                               ]
                                             ]
@@ -4416,7 +4402,10 @@
                                           ds
                                           [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]]
                                           [
-                                            [ [ unionWith addInteger ] ds ]
+                                            [
+                                              [ unionWith (builtin addInteger) ]
+                                              ds
+                                            ]
                                             [
                                               [ fAdditiveGroupValue_cscale ds ]
                                               [
@@ -5260,7 +5249,9 @@
                                                                                 [
                                                                                   [
                                                                                     unionWith
-                                                                                    addInteger
+                                                                                    (builtin
+                                                                                      addInteger
+                                                                                    )
                                                                                   ]
                                                                                   topUp
                                                                                 ]

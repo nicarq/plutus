@@ -1744,19 +1744,6 @@
                   )
                   (termbind
                     (strict)
-                    (vardecl fAdditiveGroupValue (con integer))
-                    (con -1)
-                  )
-                  (termbind
-                    (strict)
-                    (vardecl
-                      multiplyInteger
-                      (fun (con integer) (fun (con integer) (con integer)))
-                    )
-                    (builtin multiplyInteger)
-                  )
-                  (termbind
-                    (strict)
                     (vardecl
                       fAdditiveGroupValue_cscale
                       (fun (con integer) (fun [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]]))
@@ -1909,7 +1896,9 @@
                                                                           ]
                                                                           [
                                                                             [
-                                                                              multiplyInteger
+                                                                              (builtin
+                                                                                multiplyInteger
+                                                                              )
                                                                               i
                                                                             ]
                                                                             i
@@ -1967,14 +1956,6 @@
                         )
                       )
                     )
-                  )
-                  (termbind
-                    (strict)
-                    (vardecl
-                      addInteger
-                      (fun (con integer) (fun (con integer) (con integer)))
-                    )
-                    (builtin addInteger)
                   )
                   (let
                     (rec)
@@ -3187,14 +3168,8 @@
                               ds
                               [(lam a (type) a) [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]]]
                               [
-                                [ [ unionWith addInteger ] ds ]
-                                [
-                                  [
-                                    fAdditiveGroupValue_cscale
-                                    fAdditiveGroupValue
-                                  ]
-                                  ds
-                                ]
+                                [ [ unionWith (builtin addInteger) ] ds ]
+                                [ [ fAdditiveGroupValue_cscale (con -1) ] ds ]
                               ]
                             )
                           )
@@ -3210,9 +3185,6 @@
                               (fun (con bytestring) (fun (con bytestring) (fun [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]] GameInput)))
                             )
                           )
-                        )
-                        (termbind
-                          (strict) (vardecl contract (con integer)) (con 1)
                         )
                         (termbind
                           (strict)
@@ -3254,7 +3226,7 @@
                                             }
                                             tn
                                           ]
-                                          contract
+                                          (con 1)
                                         ]
                                       ]
                                       {
@@ -3271,12 +3243,6 @@
                               ]
                             )
                           )
-                        )
-                        (termbind
-                          (strict)
-                          (vardecl sha2_ (fun (con bytestring) (con bytestring))
-                          )
-                          (builtin sha2_256)
                         )
                         (termbind
                           (strict)
@@ -3493,7 +3459,9 @@
                                                                       currentSecret
                                                                     ]
                                                                     [
-                                                                      sha2_
+                                                                      (builtin
+                                                                        sha2_256
+                                                                      )
                                                                       theGuess
                                                                     ]
                                                                   ]
@@ -3981,11 +3949,6 @@
                         )
                         (termbind
                           (strict)
-                          (vardecl scheckOwnOutputConstraint (con string))
-                          (con "Output constraint")
-                        )
-                        (termbind
-                          (strict)
                           (vardecl trace (fun (con string) Unit))
                           (lam
                             arg
@@ -3996,20 +3959,12 @@
                         (termbind
                           (nonstrict)
                           (vardecl scheckOwnOutputConstraint Unit)
-                          [ trace scheckOwnOutputConstraint ]
+                          [ trace (con "Output constraint") ]
                         )
                         (termbind
                           (strict)
                           (vardecl error (all a (type) (fun Unit a)))
                           (abs e (type) (lam thunk Unit (error e)))
-                        )
-                        (termbind
-                          (strict)
-                          (vardecl
-                            subtractInteger
-                            (fun (con integer) (fun (con integer) (con integer)))
-                          )
-                          (builtin subtractInteger)
                         )
                         (let
                           (rec)
@@ -4064,7 +4019,11 @@
                                                   [
                                                     [ { bad_name a } xs ]
                                                     [
-                                                      [ subtractInteger ds ]
+                                                      [
+                                                        (builtin subtractInteger
+                                                        )
+                                                        ds
+                                                      ]
                                                       (con 1)
                                                     ]
                                                   ]
@@ -4970,17 +4929,15 @@
                               )
                             )
                             (termbind
-                              (strict)
-                              (vardecl scheckValidatorCtx (con string))
-                              (con "checkValidatorCtx failed")
-                            )
-                            (termbind
                               (nonstrict)
                               (vardecl scheckValidatorCtx_j Bool)
                               [
                                 [
                                   {
-                                    [ Unit_match [ trace scheckValidatorCtx ] ]
+                                    [
+                                      Unit_match
+                                      [ trace (con "checkValidatorCtx failed") ]
+                                    ]
                                     (fun Unit Bool)
                                   }
                                   (lam thunk Unit False)
@@ -9155,7 +9112,7 @@
                                     fMonoidValue_c
                                     (fun [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]] (fun [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]]))
                                   )
-                                  [ unionWith addInteger ]
+                                  [ unionWith (builtin addInteger) ]
                                 )
                                 (termbind
                                   (strict)

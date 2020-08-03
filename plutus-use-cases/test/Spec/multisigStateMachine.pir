@@ -3398,11 +3398,6 @@
                           )
                           (termbind
                             (strict)
-                            (vardecl scheckOwnOutputConstraint (con string))
-                            (con "Output constraint")
-                          )
-                          (termbind
-                            (strict)
                             (vardecl trace (fun (con string) Unit))
                             (lam
                               arg
@@ -3415,20 +3410,12 @@
                           (termbind
                             (nonstrict)
                             (vardecl scheckOwnOutputConstraint Unit)
-                            [ trace scheckOwnOutputConstraint ]
+                            [ trace (con "Output constraint") ]
                           )
                           (termbind
                             (strict)
                             (vardecl error (all a (type) (fun Unit a)))
                             (abs e (type) (lam thunk Unit (error e)))
-                          )
-                          (termbind
-                            (strict)
-                            (vardecl
-                              subtractInteger
-                              (fun (con integer) (fun (con integer) (con integer)))
-                            )
-                            (builtin subtractInteger)
                           )
                           (let
                             (rec)
@@ -3485,7 +3472,12 @@
                                                     [
                                                       [ { bad_name a } xs ]
                                                       [
-                                                        [ subtractInteger ds ]
+                                                        [
+                                                          (builtin
+                                                            subtractInteger
+                                                          )
+                                                          ds
+                                                        ]
                                                         (con 1)
                                                       ]
                                                     ]
@@ -5326,11 +5318,6 @@
                                   )
                                 )
                                 (termbind
-                                  (strict)
-                                  (vardecl scheckValidatorCtx (con string))
-                                  (con "checkValidatorCtx failed")
-                                )
-                                (termbind
                                   (nonstrict)
                                   (vardecl scheckValidatorCtx_j Bool)
                                   [
@@ -5338,7 +5325,10 @@
                                       {
                                         [
                                           Unit_match
-                                          [ trace scheckValidatorCtx ]
+                                          [
+                                            trace
+                                            (con "checkValidatorCtx failed")
+                                          ]
                                         ]
                                         (fun Unit Bool)
                                       }
@@ -9645,14 +9635,6 @@
                                     (termbind
                                       (strict)
                                       (vardecl
-                                        addInteger
-                                        (fun (con integer) (fun (con integer) (con integer)))
-                                      )
-                                      (builtin addInteger)
-                                    )
-                                    (termbind
-                                      (strict)
-                                      (vardecl
                                         unionWith
                                         (fun (fun (con integer) (fun (con integer) (con integer))) (fun [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]] (fun [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]])))
                                       )
@@ -9932,7 +9914,7 @@
                                         fMonoidValue_c
                                         (fun [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]] (fun [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]]))
                                       )
-                                      [ unionWith addInteger ]
+                                      [ unionWith (builtin addInteger) ]
                                     )
                                     (termbind
                                       (strict)
@@ -13361,21 +13343,6 @@
                                         (termbind
                                           (strict)
                                           (vardecl
-                                            fAdditiveGroupValue (con integer)
-                                          )
-                                          (con -1)
-                                        )
-                                        (termbind
-                                          (strict)
-                                          (vardecl
-                                            multiplyInteger
-                                            (fun (con integer) (fun (con integer) (con integer)))
-                                          )
-                                          (builtin multiplyInteger)
-                                        )
-                                        (termbind
-                                          (strict)
-                                          (vardecl
                                             fAdditiveGroupValue_cscale
                                             (fun (con integer) (fun [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]]))
                                           )
@@ -13528,7 +13495,9 @@
                                                                                                 ]
                                                                                                 [
                                                                                                   [
-                                                                                                    multiplyInteger
+                                                                                                    (builtin
+                                                                                                      multiplyInteger
+                                                                                                    )
                                                                                                     i
                                                                                                   ]
                                                                                                   i
@@ -13608,11 +13577,17 @@
                                               ds
                                               [(lam a (type) a) [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] [[(lam k (type) (lam v (type) [List [[Tuple2 k] v]])) (con bytestring)] (con integer)]]]
                                               [
-                                                [ [ unionWith addInteger ] ds ]
+                                                [
+                                                  [
+                                                    unionWith
+                                                    (builtin addInteger)
+                                                  ]
+                                                  ds
+                                                ]
                                                 [
                                                   [
                                                     fAdditiveGroupValue_cscale
-                                                    fAdditiveGroupValue
+                                                    (con -1)
                                                   ]
                                                   ds
                                                 ]
@@ -13823,7 +13798,10 @@
                                                     acc
                                                     (con integer)
                                                     [
-                                                      [ addInteger acc ] (con 1)
+                                                      [
+                                                        (builtin addInteger) acc
+                                                      ]
+                                                      (con 1)
                                                     ]
                                                   )
                                                 )

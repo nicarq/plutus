@@ -25,6 +25,7 @@ import           Language.PlutusIR.Compiler.Lower
 import           Language.PlutusIR.Compiler.Provenance
 import           Language.PlutusIR.Compiler.Types
 import qualified Language.PlutusIR.Optimizer.DeadCode        as DeadCode
+import qualified Language.PlutusIR.Transform.Inline          as Inline
 import qualified Language.PlutusIR.Transform.LetFloat        as LetFloat
 import qualified Language.PlutusIR.Transform.NonStrict       as NonStrict
 import           Language.PlutusIR.Transform.Rename          ()
@@ -37,7 +38,7 @@ import           Control.Monad.Reader
 
 -- | Perform some simplification of a 'Term'.
 simplifyTerm :: Compiling m e uni a => Term TyName Name uni b -> m (Term TyName Name uni b)
-simplifyTerm = runIfOpts deadCode
+simplifyTerm = runIfOpts (deadCode . Inline.inline)
     where
         deadCode t = do
             means <- asks _ccBuiltinMeanings

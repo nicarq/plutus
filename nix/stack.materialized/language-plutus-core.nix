@@ -218,6 +218,7 @@
           "Language/PlutusIR/Transform/Rename"
           "Language/PlutusIR/Transform/NonStrict"
           "Language/PlutusIR/Transform/LetFloat"
+          "Language/PlutusIR/Transform/Inline"
           "PlutusPrelude"
           "Common"
           "Data/ByteString/Lazy/Hash"
