@@ -147,13 +147,14 @@
           "Language/PlutusCore/Generators/Internal/Utils"
           "Language/PlutusIR/Analysis/Dependencies"
           "Language/PlutusIR/Analysis/Usages"
-          "Language/PlutusIR/Compiler/Error"
           "Language/PlutusIR/Compiler/Let"
           "Language/PlutusIR/Compiler/Datatype"
           "Language/PlutusIR/Compiler/Provenance"
           "Language/PlutusIR/Compiler/Recursion"
           "Language/PlutusIR/Compiler/Types"
           "Language/PlutusIR/Compiler/Lower"
+          "Language/PlutusIR/Normalize"
+          "Language/PlutusIR/TypeCheck/Internal"
           "Language/UntypedPlutusCore/Core"
           "Language/UntypedPlutusCore/Core/Instance"
           "Language/UntypedPlutusCore/Core/Instance/Eq"
@@ -217,6 +218,7 @@
           "Language/PlutusIR/Compiler"
           "Language/PlutusIR/Compiler/Names"
           "Language/PlutusIR/Compiler/Definitions"
+          "Language/PlutusIR/Error"
           "Language/PlutusIR/Generators/AST"
           "Language/PlutusIR/Parser"
           "Language/PlutusIR/MkPir"
@@ -227,6 +229,7 @@
           "Language/PlutusIR/Transform/Rename"
           "Language/PlutusIR/Transform/NonStrict"
           "Language/PlutusIR/Transform/LetFloat"
+          "Language/PlutusIR/TypeCheck"
           "Language/UntypedPlutusCore"
           "PlutusPrelude"
           "Common"
@@ -329,6 +332,7 @@
             (hsPkgs."filepath" or (errorHandler.buildDepError "filepath"))
             (hsPkgs."text" or (errorHandler.buildDepError "text"))
             (hsPkgs."plutus-core" or (errorHandler.buildDepError "plutus-core"))
+            (hsPkgs."lens" or (errorHandler.buildDepError "lens"))
             (hsPkgs."mtl" or (errorHandler.buildDepError "mtl"))
             (hsPkgs."mmorph" or (errorHandler.buildDepError "mmorph"))
             (hsPkgs."prettyprinter" or (errorHandler.buildDepError "prettyprinter"))
@@ -338,7 +342,13 @@
             (hsPkgs."megaparsec" or (errorHandler.buildDepError "megaparsec"))
             ];
           buildable = true;
-          modules = [ "OptimizerSpec" "TransformSpec" "ParserSpec" "TestLib" ];
+          modules = [
+            "OptimizerSpec"
+            "TransformSpec"
+            "ParserSpec"
+            "TypeSpec"
+            "TestLib"
+            ];
           hsSourceDirs = [ "plutus-ir-test" ];
           mainPath = [ "Spec.hs" ];
           };
