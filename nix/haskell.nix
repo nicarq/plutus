@@ -104,25 +104,25 @@ let
             iohk-monitoring.doHaddock = false;
 
             # Werror everything. This is a pain, see https://github.com/input-output-hk/haskell.nix/issues/519
-            deployment-server.package.ghcOptions = "-Werror";
-            iots-export.package.ghcOptions = "-Werror";
-            language-plutus-core.package.ghcOptions = "-Werror";
-            marlowe.package.ghcOptions = "-Werror";
-            marlowe-symbolic.package.ghcOptions = "-Werror";
-            marlowe-actus.package.ghcOptions = "-Werror";
-            marlowe-playground-server.package.ghcOptions = "-Werror";
-            playground-common.package.ghcOptions = "-Werror";
+            #deployment-server.package.ghcOptions = "-Werror";
+            #iots-export.package.ghcOptions = "-Werror";
+            #language-plutus-core.package.ghcOptions = "-Werror";
+            #marlowe.package.ghcOptions = "-Werror";
+            #marlowe-symbolic.package.ghcOptions = "-Werror";
+            #marlowe-actus.package.ghcOptions = "-Werror";
+            #marlowe-playground-server.package.ghcOptions = "-Werror";
+            #playground-common.package.ghcOptions = "-Werror";
             # FIXME: has warnings
             #plc-agda.package.ghcOptions = "-Werror";
-            plutus-book.package.ghcOptions = "-Werror";
-            plutus-contract.package.ghcOptions = "-Werror";
-            plutus-ledger.package.ghcOptions = "-Werror";
-            plutus-playground-server.package.ghcOptions = "-Werror";
-            plutus-scb.package.ghcOptions = "-Werror";
-            plutus-tx.package.ghcOptions = "-Werror";
-            plutus-tx-plugin.package.ghcOptions = "-Werror";
-            plutus-doc.package.ghcOptions = "-Werror";
-            plutus-use-cases.package.ghcOptions = "-Werror";
+            #plutus-book.package.ghcOptions = "-Werror";
+            #plutus-contract.package.ghcOptions = "-Werror";
+            #plutus-ledger.package.ghcOptions = "-Werror";
+            #plutus-playground-server.package.ghcOptions = "-Werror";
+            #plutus-scb.package.ghcOptions = "-Werror";
+            #plutus-tx.package.ghcOptions = "-Werror";
+            #plutus-tx-plugin.package.ghcOptions = "-Werror";
+            #plutus-doc.package.ghcOptions = "-Werror";
+            #plutus-use-cases.package.ghcOptions = "-Werror";
           };
         }
      ];

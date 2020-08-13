@@ -5,12 +5,12 @@
 # These are for e.g. developer usage, or for running formatting tests.
 ############################################################################
 { pkgs, index-state, checkMaterialization }:
-let compiler-nix-name = "ghc883";
+let compiler-nix-name = "ghc8102";
 in {
   Agda = pkgs.haskell-nix.hackage-package {
     name = "Agda";
     version = "2.6.1";
-    plan-sha256 = "0gvvhwjcwmq8avcqz8azv8db2171qvigkam3i9bgr6z13xk995ha";
+    plan-sha256 = "0bpa5z5j1iy4w3jq5lb6v9dx5dccahn02frkizqa6h4whjfi54gx";
     inherit compiler-nix-name index-state checkMaterialization;
     modules = [{
       # Agda is a huge pain. They have a special custom setup that compiles the interface files for
@@ -38,27 +38,28 @@ in {
         done
       '';
     }];
+    configureArgs = "--constraint 'haskeline == 0.8.0.0'";
   };
   cabal-install = pkgs.haskell-nix.hackage-package {
     name = "cabal-install";
     version = "3.2.0.0";
     inherit compiler-nix-name index-state checkMaterialization;
     # Invalidate and update if you change the version or index-state
-    plan-sha256 = "06j2m7jvqfw65cn717kgflh49a0n1jkra4iw841z5ryh2y7y48pr";
+    plan-sha256 = "1s5c3s7jsaf1arqgz2z7ng0nym83vsinm69lm8wvhpk5rdpfhbld";
   };
   stylish-haskell = pkgs.haskell-nix.hackage-package {
     name = "stylish-haskell";
     version = "0.10.0.0";
     inherit compiler-nix-name index-state checkMaterialization;
     # Invalidate and update if you change the version or index-state
-    plan-sha256 = "0zaypywwcq8kh1q0flc6azqilvabbzbchi2i155agjsq3b7xs3k0";
+    plan-sha256 = "0jz1f417rgk9ifhmv11havw6pgqkg3hax3d7rd3zv219cn8n55rf";
   };
   hlint = pkgs.haskell-nix.hackage-package {
     name = "hlint";
     version = "2.2.11";
     inherit compiler-nix-name index-state checkMaterialization;
     # Invalidate and update if you change the version or index-state
-    plan-sha256 = "10zw1zvs2bbdyh2mg01vm8wz6n65m2qkvz1va9hzhj8ch00nvpbh";
+    plan-sha256 = "08dgfnavl4xfpl3a0nhxaabgslbhgbwxmmv6m4n4p08h1ql9hms3";
   };
   inherit (
     let hspkgs = pkgs.haskell-nix.cabalProject {
@@ -75,7 +76,7 @@ in {
           }."${location}"."${tag}";
         inherit compiler-nix-name index-state checkMaterialization;
         # Invalidate and update if you change the version
-        plan-sha256 = "0a6c4lhnlm2lkic91ips0gb3hqlp3fk2aa01nsa8dhz9l8zg63da";
+        plan-sha256 = "0aqp43yvcm673q8aycmszm38wr8f45cpwgn4mdzym1mvxxi216lj";
         modules = [{
           # Tests don't pass for some reason, but this is a somewhat random revision.
           packages.haskell-language-server.doCheck = false;
